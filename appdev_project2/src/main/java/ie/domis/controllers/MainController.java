@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 	
-//	@Secured({"ROLE_ADMIN", "ROLE_USER"})
-	@GetMapping(value= {"/"})
+	@Secured({"ROLE_USER"})//"ROLE_ADMIN", 
+	@GetMapping(value= {"/", "/index"})
 	public String handleIndexRequest() {
 		return "index";
 	}
