@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<!--<link rel="stylesheet" type="text/css" href="/css/styles.css"/>-->
-		<title>Welcome</title>
-		<meta charset="utf-8"/>
-	</head>
-	<body>
-		<h1>Welcome</h1>
-		<p><a href="/h2">H2 CONSOLE</a></p>
-	</body>
+<html>
+<head>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+    <header>
+        <div class="search">
+        <input type="text" class="input" name="q" placeholder="
+        Search keyword">
+        <input type="submit" class="search-button" value="Search">
+        </div>
+        <h1>JOB ADVERTISEMENTS</h1>
+        <div class="logout">
+        <h5>Hello"xyz"</h5>
+        <button>Logout</button>
+        </div>
+    </header>
+    <main>
+        <div class="head">
+        <h3>ID</h3>
+        <h3>Name</h3>
+        <h3>Description</h3>
+        <h3>Date Published</h3>
+        </div>
+        <button class="view">View</button>
+    </main>
+</body>
 </html>
