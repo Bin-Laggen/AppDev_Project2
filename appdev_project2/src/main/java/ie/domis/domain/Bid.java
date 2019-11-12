@@ -1,8 +1,5 @@
 package ie.domis.domain;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,33 +18,31 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Job {
+public class Bid {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int jobId;
-	
-	@Column(nullable=false)
-	private String name;
-	
-	@Column(nullable=false)
-	private String description;
-	
-	@Column(nullable=false)
-	private LocalDateTime date;
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn
-	private User owner;
+	private User bidder;
 	
-	@OneToMany(mappedBy = "job")
-	private List<Bid> bids;
+	@ManyToOne
+	@JoinColumn
+	private Job job;
 	
-	public Job(String name, String description, LocalDateTime date, User owner) {
-		this.name = name;
-		this.description = description;
-		this.date = date;
-		this.owner = owner;
+	@Column(nullable=false)
+	private float value;
+	
+	public Bid(User bidder, Job job, float value) {
+		this.bidder = bidder;
+		this.job = job;
+		this.value = value;
 	}
-
+	
+	public String toString() {
+		return "Bid:" + "\n\tBidder: " + bidder.toString() + "\n\tJob: " + job.toString();
+	}
+	
 }

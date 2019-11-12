@@ -1,10 +1,14 @@
 package ie.domis.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
@@ -21,7 +25,7 @@ import lombok.Setter;
 public class User {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int userId;
 
 	@Column(nullable=false, unique=true)
@@ -45,7 +49,13 @@ public class User {
 	
 	@OneToOne
 	@JoinColumn
-	Role userRole;
+	private Role userRole;
+	
+	@OneToMany(mappedBy = "owner")
+	private List<Job> jobs;
+	
+	@OneToMany(mappedBy = "bidder")
+	private List<Bid> bids;
 
 	public User(String email, String password, String name, String surname, int phoneNumber, Role role, boolean enabled) {
 		this.email = email;

@@ -1,14 +1,19 @@
 package ie.domis;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import ie.domis.dao.BidDAO;
 import ie.domis.dao.JobDAO;
 import ie.domis.dao.RoleDAO;
 import ie.domis.dao.UserDAO;
+import ie.domis.domain.Bid;
+import ie.domis.domain.Job;
 import ie.domis.domain.Role;
 import ie.domis.domain.User;
 
@@ -25,14 +30,21 @@ public class DataLoader implements ApplicationRunner {
 	RoleDAO roleDao;
 	
 	@Autowired
+	BidDAO bidDao;
+	
+	@Autowired
 	PasswordEncoder passEnc;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Role johnRole = roleDao.save(new Role("john@email.com", "ROLE_USER"));
-		Role maryRole = roleDao.save(new Role("mary@email.com", "ROLE_USER"));
-		Role patRole = roleDao.save(new Role("pat@email.com", "ROLE_USER"));
-		Role adminRole = roleDao.save(new Role("admin@email.com", "ROLE_ADMIN"));
+		Role johnRole = new Role("john@email.com", "ROLE_USER");
+		roleDao.save(johnRole);
+		Role maryRole = new Role("mary@email.com", "ROLE_USER");
+		roleDao.save(maryRole);
+		Role patRole = new Role("pat@email.com", "ROLE_USER");
+		roleDao.save(patRole);
+		Role adminRole = new Role("admin@email.com", "ROLE_ADMIN");
+		roleDao.save(adminRole);
 		
 		User john = new User("john@email.com", passEnc.encode("johnPass"), "John", "Johnson", 871234567, johnRole, true);
 		userDao.save(john);
@@ -42,6 +54,29 @@ public class DataLoader implements ApplicationRunner {
 		userDao.save(pat);
 		User admin = new User("admin@email.com", passEnc.encode("adminPass"), "Admin", "Admin", 123456789, adminRole, true);
 		userDao.save(admin);
+		
+		Job j1 = new Job("Bathroom refurbish", "Small ensuite bathroom needs new tiles", LocalDateTime.now(), mary);
+		jobDao.save(j1);
+		Job j2 = new Job("Bedroom repaint", "Bedroom repaint required after dog left mud on the walls", LocalDateTime.now(), mary);
+		jobDao.save(j2);
+		Job j3 = new Job("IKEA kitchen install", "IKEA kitchen install", LocalDateTime.now(), john);
+		jobDao.save(j3);
+		Job j4 = new Job("Garage cleanup", "Remove junk and old shelving", LocalDateTime.now(), pat);
+		jobDao.save(j4);
+		
+		Bid b1 = new Bid(pat, j2, 150);
+		bidDao.save(b1);
+		Bid b2 = new Bid(john, j2, 200);
+		bidDao.save(b2);
+		Bid b3 = new Bid(john, j1, 500);
+		bidDao.save(b3);
+		Bid b4 = new Bid(pat, j2, 250);
+		bidDao.save(b4);
+		Bid b5 = new Bid(mary, j3, 1000);
+		bidDao.save(b5);
+		Bid b6 = new Bid(pat, j1, 550);
+		bidDao.save(b6);
+		
 		
 //		System.out.println(john);
 //		System.out.println(mary);
