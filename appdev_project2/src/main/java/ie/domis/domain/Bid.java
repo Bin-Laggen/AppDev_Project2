@@ -22,14 +22,14 @@ public class Bid {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private int bidId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="bidder")
 	private User bidder;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="job")
 	private Job job;
 	
 	@Column(nullable=false)

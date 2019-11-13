@@ -37,17 +37,21 @@ public class Job {
 	@Column(nullable=false)
 	private LocalDateTime date;
 	
+	@Column(nullable=false)
+	private boolean active;
+	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="owner")
 	private User owner;
 	
 	@OneToMany(mappedBy = "job")
 	private List<Bid> bids;
 	
-	public Job(String name, String description, LocalDateTime date, User owner) {
+	public Job(String name, String description, LocalDateTime date, boolean active, User owner) {
 		this.name = name;
 		this.description = description;
 		this.date = date;
+		this.active = active;
 		this.owner = owner;
 	}
 
