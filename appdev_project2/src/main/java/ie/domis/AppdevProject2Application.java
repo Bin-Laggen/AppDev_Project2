@@ -49,12 +49,8 @@ public class AppdevProject2Application implements CommandLineRunner {
 		}
 
 		System.out.println("\n\n========== USERS ==========");
-		System.out.print("\tIDs: ");
 		List<Integer> userIds = userService.findAllUserIds();
-		for (int i : userIds) {
-			System.out.print(i + ", ");
-		}
-		System.out.println();
+		System.out.println("IDs: " + userIds.toString());
 
 		System.out.println("\nALL USERS");
 		List<User> users = userService.findAll();
@@ -76,12 +72,8 @@ public class AppdevProject2Application implements CommandLineRunner {
 		}
 
 		System.out.println("\n\n========== JOBS ==========");
-		System.out.print("\tIDs: ");
 		List<Integer> jobIds = jobService.findAllJobIds();
-		for (int i : jobIds) {
-			System.out.print(i + ", ");
-		}
-		System.out.println();
+		System.out.println("IDs: " + jobIds.toString());
 
 		System.out.println("\nALL JOBS");
 		List<Job> jobs = jobService.findAllJobs();
@@ -102,12 +94,8 @@ public class AppdevProject2Application implements CommandLineRunner {
 		}
 		
 		System.out.println("\n\n========== BIDS ==========");
-		System.out.print("\tIDs: ");
 		List<Integer> bidIds = bidService.findAllBidIds();
-		for (int i : bidIds) {
-			System.out.print(i + ", ");
-		}
-		System.out.println();
+		System.out.println("IDs: " + bidIds.toString());
 
 		System.out.println("\nALL BIDS");
 		List<Bid> bids = bidService.findAll();
