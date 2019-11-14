@@ -54,5 +54,19 @@ public class Job {
 		this.active = active;
 		this.owner = owner;
 	}
+	
+	public String toString() {
+		String output = "Job: ";
+		if (this.jobId != 0) {
+			output += this.jobId;
+		}
+		output += "\n\tName: " + this.name + "\n\tDescription: " + this.description + "\n\tOwner: " + this.owner.getEmail() + "\n\tDate Created: " + this.date.toString() + "\n\tActive: ";
+		if (this.active) {
+			output += "Yes";
+		} else {
+			output += "No";
+		}
+		return output;
+	}
 
 }

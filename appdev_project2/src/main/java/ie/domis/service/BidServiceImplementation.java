@@ -44,6 +44,11 @@ public class BidServiceImplementation implements BidService {
 	}
 
 	@Override
+	public List<Integer> findAllBidIds() {
+		return dao.findAllBidIds();
+	}
+
+	@Override
 	public Bid addBid(Bid bid) {
 		if (isBidInDatabase(bid.getBidId())) {
 			return null;

@@ -11,12 +11,13 @@ public interface JobService {
 	List<Job> findAllJobs();
 	List<Job> findAllOwnersJobs(int userId);
 	List<Job> findAllActiveJobs();
-	int addJob(Job job);
+	List<Integer> findAllJobIds();
+	Job addJob(Job job);
 	boolean removeJob(int id);
 	boolean updateJobName(int id, String name);
 	boolean updateJobDescription(int id, String description);
 	boolean updateJobOwner(int id, User owner);
-	boolean updateJobEnabled(int id, boolean enabled);
+	boolean updateJobActive(int id, boolean active);
 	boolean isJobInDatabase(int id);
 	
 }

@@ -8,23 +8,23 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import ie.domis.dao.JobDAO;
 import ie.domis.dao.RoleDAO;
-import ie.domis.dao.UserDAO;
 import ie.domis.domain.Bid;
 import ie.domis.domain.Job;
 import ie.domis.domain.Role;
 import ie.domis.domain.User;
 import ie.domis.service.BidService;
+import ie.domis.service.JobService;
+import ie.domis.service.UserService;
 
 @Component
 public class DataLoader implements ApplicationRunner {
 
 	@Autowired
-	UserDAO userDao;
+	UserService userService;
 	
 	@Autowired
-	JobDAO jobDao;
+	JobService jobService;
 	
 	@Autowired
 	RoleDAO roleDao;
@@ -47,22 +47,22 @@ public class DataLoader implements ApplicationRunner {
 		roleDao.save(adminRole);
 		
 		User john = new User("john@email.com", passEnc.encode("johnPass"), "John", "Johnson", 871234567, johnRole, true);
-		userDao.save(john);
+		userService.addUser(john);
 		User mary = new User("mary@email.com", passEnc.encode("maryPass"), "Mary", "Cook", 857654321, maryRole, true);
-		userDao.save(mary);
+		userService.addUser(mary);
 		User pat = new User("pat@email.com", passEnc.encode("patPass"), "Pat", "Murphy", 865431267, patRole, true);
-		userDao.save(pat);
+		userService.addUser(pat);
 		User admin = new User("admin@email.com", passEnc.encode("adminPass"), "Admin", "Admin", 123456789, adminRole, true);
-		userDao.save(admin);
+		userService.addUser(admin);
 		
 		Job j1 = new Job("Bathroom refurbish", "Small ensuite bathroom needs new tiles", LocalDateTime.now(), true, mary);
-		jobDao.save(j1);
+		jobService.addJob(j1);
 		Job j2 = new Job("Bedroom repaint", "Bedroom repaint required after dog left mud on the walls", LocalDateTime.now(), true, mary);
-		jobDao.save(j2);
+		jobService.addJob(j2);
 		Job j3 = new Job("IKEA kitchen install", "IKEA kitchen install", LocalDateTime.now(), true, john);
-		jobDao.save(j3);
+		jobService.addJob(j3);
 		Job j4 = new Job("Garage cleanup", "Remove junk and old shelving", LocalDateTime.now(), true, pat);
-		jobDao.save(j4);
+		jobService.addJob(j4);
 		
 		Bid b1 = new Bid(pat, j2, 150);
 		b1 = bidService.addBid(b1);

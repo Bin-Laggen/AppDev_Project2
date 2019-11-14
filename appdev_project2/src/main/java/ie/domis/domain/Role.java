@@ -21,5 +21,9 @@ public class Role {
 	
 	@Column
 	private String roleDescription;
+	
+	public String toString() {
+		return "User: " + this.userEmail + "\n\tRole: " + this.roleDescription;
+	}
 
 }

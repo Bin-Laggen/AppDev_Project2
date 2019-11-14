@@ -42,7 +42,12 @@ public class Bid {
 	}
 	
 	public String toString() {
-		return "Bid:" + "\n\tBidder: " + bidder.toString() + "\n\tJob: " + job.toString();
+		String output = "Bid: ";
+		if (this.bidId != 0) {
+			output += this.bidId;
+		}
+		output += "\n\tBidder: " + bidder.getEmail() + "\n\tJob: " + job.getJobId();
+		return output;
 	}
 	
 }

@@ -17,6 +17,9 @@ public interface BidDAO extends JpaRepository<Bid, Integer> {
 	List<Bid> findAllBidsByBidder(User bidder);
 	List<Bid> findAllBidsByJob(Job job);
 	
+	@Query(value="SELECT bidId FROM bid", nativeQuery=true)
+	List<Integer> findAllBidIds();
+	
 	@Modifying
 	@Transactional
 	@Query(value="UPDATE bid SET bidder= :bidder WHERE bidId= :id", nativeQuery= true)

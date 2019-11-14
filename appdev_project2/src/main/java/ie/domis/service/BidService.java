@@ -12,6 +12,7 @@ public interface BidService {
 	Bid findById(int id);
 	List<Bid> findAllBidsByBidder(int id);
 	List<Bid> findAllBidsByJob(int id);
+	List<Integer> findAllBidIds();
 	Bid addBid(Bid bid);
 	boolean removeBid(int id);
 	boolean updateBidBidder(int id, User bidder);
