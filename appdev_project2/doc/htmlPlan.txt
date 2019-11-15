@@ -1,0 +1,35 @@
+User
+ - Info
+ - Jobs assigned
+ - add new Job
+
+Job
+ - Name
+ - Desc.
+ - Date
+ - Bid table
+ - Option to bid
+
+Główna stronka XD
+ - jobs
+	- name
+	- description
+	- date
+	- latest bid
+ - log out
+
+Welcome
+ - Log in
+ - Register
+
+Register
+ - Name
+ - Surname
+ - phone no
+ - email
+ - password
+
+New Job
+ - Name 
+ - Description
+ - Bid starting price
