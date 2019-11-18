@@ -1,5 +1,6 @@
 package ie.domis.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,21 @@ public class MainController {
 	@Autowired
 	UserService userService;
 	
-	@Secured({"ROLE_USER"})//"ROLE_ADMIN", 
+	@Secured({"ROLE_USER"})
 	@GetMapping(value= {"/", "/index"})
-	public String handleIndexRequest(Model model) {
+	public String handleIndexRequest(Model model, Principal user) {
+		User loggedInUser = userService.findByEmail(user.getName());
+		model.addAttribute("user", loggedInUser);
 		List<Job> jobs = jobService.findAllJobs();
 		model.addAttribute("jobs", jobs);
 		return "index";
 	}
 	
-	@Secured({"ROLE_USER"})//"ROLE_ADMIN", 
+	@Secured({"ROLE_USER"})
 	@GetMapping(value= {"/job/{id}"})
-	public String handleJobRequest(@PathVariable("id") int id, Model model) {
+	public String handleJobRequest(@PathVariable("id") int id, Model model, Principal user) {
+		User loggedInUser = userService.findByEmail(user.getName());
+		model.addAttribute("user", loggedInUser);
 		Job job = jobService.findJobById(id);
 		System.out.println(job);
 		if (job == null) {
@@ -53,7 +58,9 @@ public class MainController {
 	
 	@Secured({"ROLE_ADMIN"})
 	@GetMapping(value= {"/users"})
-	public String handleUsersRequest(Model model) {
+	public String handleUsersRequest(Model model, Principal user) {
+		User loggedInUser = userService.findByEmail(user.getName());
+		model.addAttribute("user", loggedInUser);
 		List<User> users = userService.findAll();
 		model.addAttribute("users", users);
 		return "users";
