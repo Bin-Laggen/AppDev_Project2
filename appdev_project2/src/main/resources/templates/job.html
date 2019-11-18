@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
 
 <body>
@@ -18,10 +18,10 @@
         </div>
     </header>
     <main>
-        <p th:text="*{name}">Name</p>
-        <p th:text="*{description}">Description</p>
-        <p th:text="*{date}">Date</p>
-        <p th:text="*{active}">Active</p>
+        <p th:text="${job.name}">Name</p>
+        <p th:text="${job.description}">Description</p>
+        <p th:text="${job.date}">Date</p>
+        <p th:text="${job.active}">Active</p>
         
         <table>
             <tr>
@@ -29,8 +29,8 @@
                 <th>Value</th>
             </tr>
             <tr>
-                <td th:text="*{name}">Name</td>
-                <td th:text="*{value}">Value</td>
+                <td th:text="${job.name}">Name</td>
+                <td th:text="${job.description}">Description</td>
             </tr>
         </table>
     </main>

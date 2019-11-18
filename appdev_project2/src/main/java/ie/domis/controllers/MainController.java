@@ -30,7 +30,8 @@ public class MainController {
 	@GetMapping(value= {"/job/{id}"})
 	public String handleJobRequest(@PathVariable("id") int id, Model model) {
 		Job job = jobService.findJobById(id);
-		if (job != null) {
+		System.out.println(job);
+		if (job == null) {
 			model.addAttribute("id", id);
 			return "doesnotexist";
 		}
