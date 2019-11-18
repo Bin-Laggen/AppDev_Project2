@@ -13,8 +13,8 @@
         </div>
         <h1>JOB ADVERTISEMENTS</h1>
         <div class="logout">
-            <h5>Hello"xyz"</h5>
-            <a href="http://localhost:8080/logout"><button>Log Out</button></a>
+            <h5>Hello </h5>
+            <a th:href="@{'/logout'}"><button>Log Out</button></a>
         </div>
     </header>
     <main>
@@ -23,12 +23,14 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Date Published</th>
+                <th>Last Bid</th>
                 <th></th>
             </tr>
             <tr th:each="job : ${jobs}">
                 <td th:text="${job.name}">Name</td>
                 <td th:text="${job.description}">Description</td>
                 <td th:text="${job.date}">Date</td>
+                <td th:text="${bid.value}">Last Bid</td>
                 <td align='center'><a th:href="@{'/job/' + ${job.jobId}}">View</a></td>
             </tr>
         </table>
