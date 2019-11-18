@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+</head>
+
+<body>
+    <header>
+        <div></div>
+        <div><h1>JOB ADVERTISEMENTS</h1></div>
+        <div class="logout">
+            <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <a th:href="@{'/logout'}"><button>Log Out</button></a>
+        </div>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td th:text="${user.name} + ' ' + ${user.surname}">Name</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td th:text="${user.email}">Email</td>
+            </tr>
+            <tr>
+                <td>Phone No.:</td>
+                <td th:text="${user.phoneNumber}">Phone</td>
+            </tr>
+        </table>
+    </main>
+</body>
+
+</html>

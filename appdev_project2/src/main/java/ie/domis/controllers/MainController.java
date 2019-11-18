@@ -65,5 +65,13 @@ public class MainController {
 		model.addAttribute("users", users);
 		return "users";
 	}
+	
+	@GetMapping(value= {"/user/{id}"})
+	public String handleAccountRequest(@PathVariable("id") int id, Model model, Principal user) {
+		User loggedInUser = userService.findByEmail(user.getName());
+		model.addAttribute("user", loggedInUser);
+		return "account";
+	}
+	
 
 }

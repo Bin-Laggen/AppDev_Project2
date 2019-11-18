@@ -8,9 +8,9 @@
 <body>
     <header>
         <div></div>
-        <h1>JOB ADVERTISEMENTS</h1>
+        <div><h1>JOB ADVERTISEMENTS</h1></div>
         <div class="logout">
-            <h5>Hello</h5>
+            <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button>Log Out</button></a>
         </div>
     </header>

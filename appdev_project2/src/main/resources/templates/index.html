@@ -11,9 +11,9 @@
             <input type="text" class="input" name="q" placeholder="Search keyword">
             <input type="submit" class="search-button" value="Search">
         </div>
-        <h1>JOB ADVERTISEMENTS</h1>
+        <div><h1>JOB ADVERTISEMENTS</h1></div>
         <div class="logout">
-            <h5>Hello </h5>
+            <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button>Log Out</button></a>
         </div>
     </header>
@@ -23,14 +23,12 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Date Published</th>
-                <th>Last Bid</th>
                 <th></th>
             </tr>
             <tr th:each="job : ${jobs}">
                 <td th:text="${job.name}">Name</td>
                 <td th:text="${job.description}">Description</td>
                 <td th:text="${job.date}">Date</td>
-                <td th:text="${bid.value}">Last Bid</td>
                 <td align='center'><a th:href="@{'/job/' + ${job.jobId}}">View</a></td>
             </tr>
         </table>
