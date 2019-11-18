@@ -19,5 +19,7 @@ public interface BidService {
 	boolean updateBidJob(int id, Job job);
 	boolean updateBidValue(int id, float value);
 	boolean isBidInDatabase(int id);
+	boolean doesJobHaveBids(int jobId);
+	Bid getMaxBidForJob(int jobId);
 
 }

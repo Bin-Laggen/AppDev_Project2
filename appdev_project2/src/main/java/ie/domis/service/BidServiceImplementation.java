@@ -15,6 +15,9 @@ public class BidServiceImplementation implements BidService {
 	
 	@Autowired
 	BidDAO dao;
+	
+	@Autowired
+	JobService jobService;
 
 	@Override
 	public List<Bid> findAll() {
@@ -51,6 +54,10 @@ public class BidServiceImplementation implements BidService {
 	@Override
 	public Bid addBid(Bid bid) {
 		if (isBidInDatabase(bid.getBidId())) {
+			return null;
+		}
+		Bid maxBid = getMaxBidForJob(bid.getJob().getJobId());
+		if (maxBid != null && (bid.getValue() > maxBid.getValue())) {
 			return null;
 		}
 		return dao.save(bid);
@@ -95,6 +102,19 @@ public class BidServiceImplementation implements BidService {
 	@Override
 	public boolean isBidInDatabase(int id) {
 		return dao.existsById(id);
+	}
+
+	@Override
+	public boolean doesJobHaveBids(int jobId) {
+		return dao.existsJob(jobId);
+	}
+
+	@Override
+	public Bid getMaxBidForJob(int jobId) {
+		if (doesJobHaveBids(jobId)) {
+			return dao.getMaxBidByJob(jobId);
+		}
+		return null;
 	}
 
 }
