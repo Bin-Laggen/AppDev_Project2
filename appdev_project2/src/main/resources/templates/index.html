@@ -23,11 +23,11 @@
                 <th>Date Published</th>
                 <th></th>
             </tr>
-            <tr>
-                <td th:text="*{name}">Name</td>
-                <td th:text="*{description}">Description</td>
-                <td th:text="*{date}">Date</td>
-                <td align='center'><form><input type=submit value="View"></form></td>
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.name}">Name</td>
+                <td th:text="${job.description}">Description</td>
+                <td th:text="${job.date}">Date</td>
+                <td align='center'><a th:href="@{'/job/' + ${job.jobId}}">View</a></td>
             </tr>
         </table>
     </main>

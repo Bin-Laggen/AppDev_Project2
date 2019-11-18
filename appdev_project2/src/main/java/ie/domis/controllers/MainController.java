@@ -1,5 +1,7 @@
 package ie.domis.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,9 @@ public class MainController {
 	
 	@Secured({"ROLE_USER"})//"ROLE_ADMIN", 
 	@GetMapping(value= {"/", "/index"})
-	public String handleIndexRequest() {
+	public String handleIndexRequest(Model model) {
+		List<Job> jobs = jobService.findAllJobs();
+		model.addAttribute("jobs", jobs);
 		return "index";
 	}
 	
