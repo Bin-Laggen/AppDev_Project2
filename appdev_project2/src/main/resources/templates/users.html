@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+</head>
+<body>
+    <header>
+        <div class="search">
+        <input type="text" class="input" name="q" placeholder="Search keyword">
+        <input type="submit" class="search-button" value="Search">
+        </div>
+        <h1>JOB ADVERTISEMENTS</h1>
+        <div class="logout">
+        <h5>Hello"xyz"</h5>
+        <button>Logout</button>
+        </div>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Phone Number</th>
+            </tr>
+            <tr th:each="user : ${users}">
+            	<td th:text="${user.email}">E-mail</td>
+                <td th:text="${user.name}">Name</td>
+                <td th:text="${user.surname}">Description</td>
+                <td th:text="${user.phoneNumber}">Date</td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>
