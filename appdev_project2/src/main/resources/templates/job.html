@@ -2,35 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/job.css">
 </head>
 
 <body>
     <header>
-        <div class="search">
-            <input type="text" class="input" name="q" placeholder="Search keyword">
-            <input type="submit" class="search-button" value="Search">
-        </div>
+        <div></div>
         <h1>JOB ADVERTISEMENTS</h1>
         <div class="logout">
-            <h5>Hello"xyz"</h5>
+            <h5>Hello<a>"user"</a></h5>
             <button>Logout</button>
         </div>
     </header>
     <main>
-        <p th:text="${job.name}">Name</p>
-        <p th:text="${job.description}">Description</p>
-        <p th:text="${job.date}">Date</p>
-        <p th:text="${job.active}">Active</p>
-        
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td th:text="${job.name}">Name</td>
+            </tr>
+            <tr>
+                <td>Description:</td>
+                <td th:text="${job.description}">Description</td>
+            </tr>
+            <tr>
+                <td>Date:</td>
+                <td th:text="${job.date}">Date</td>
+            </tr>
+            <tr>
+                <td>Job owner:</td>
+                <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
+            </tr>
+            <tr>
+                <td>Contact:</td>
+                <td th:text="${job.owner.email}">Contact</td>
+            </tr>
+            <tr>
+                <td>Active:</td>
+                <td th:text="${job.active}">Active</td>
+            </tr>
+        </table>
+
         <table>
             <tr>
                 <th>Name</th>
                 <th>Value</th>
             </tr>
-            <tr>
-                <td th:text="${job.name}">Name</td>
-                <td th:text="${job.description}">Description</td>
+            <tr th:each="bid : ${bids}">
+                <td th:text="${bid.bidder.email}">Bidder</td>
+                <td th:text="${bid.value}">Value</td>
             </tr>
         </table>
     </main>
