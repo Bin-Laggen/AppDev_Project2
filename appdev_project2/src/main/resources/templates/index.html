@@ -6,8 +6,7 @@
 <body>
     <header>
         <div class="search">
-        <input type="text" class="input" name="q" placeholder="
-        Search keyword">
+        <input type="text" class="input" name="q" placeholder="Search keyword">
         <input type="submit" class="search-button" value="Search">
         </div>
         <h1>JOB ADVERTISEMENTS</h1>
@@ -17,13 +16,20 @@
         </div>
     </header>
     <main>
-        <div class="head">
-        <h3>ID</h3>
-        <h3>Name</h3>
-        <h3>Description</h3>
-        <h3>Date Published</h3>
-        </div>
-        <button class="view">View</button>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date Published</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td th:text="*{name}">Name</td>
+                <td th:text="*{description}">Description</td>
+                <td th:text="*{date}">Date</td>
+                <td align='center'><form><input type=submit value="View"></form></td>
+            </tr>
+        </table>
     </main>
 </body>
 </html>
