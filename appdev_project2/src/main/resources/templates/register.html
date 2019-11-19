@@ -6,38 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Please sign in</title>
+    <title>Register</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
-        <form class="form-signin" method="post" action="/login">
+        <form class="form-signin" method="post" th:action="@{/register}" th:object="${userForm}">
             <h2 class="form-signin-heading">Please register</h2>
             <p>
-                <label for="name" class="sr-only">Name</label>
-                <input type="name" id="name" name="name" class="form-control" placeholder="Name" required="true">
+                <label for="name" class="sr-only" th:text="#{register.name}" >Name</label>
+                <input type="name" id="name" name="name" class="form-control" placeholder="Name" required="true" th:field="*{name}">
+                <span th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}" >Error</span>
             </p>
             <p>
-                <label for="surname" class="sr-only">Surname</label>
-                <input type="surname" id="surname" name="surname" class="form-control" placeholder="Surname" required="true">
+                <label for="surname" class="sr-only" th:text="#{register.surname}">Surname</label>
+                <input type="surname" id="surname" name="surname" class="form-control" placeholder="Surname" required="true" th:field="*{surname}">
+                <span th:if="${#fields.hasErrors('surname')}" class="error" th:errors="*{surname}" >Error</span>
             </p>
             <p>
-                <label for="email" class="sr-only">Email</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="true">
+                <label for="email" class="sr-only" th:text="#{register.email}">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required="true" th:field="*{email}">
+                <span th:if="${#fields.hasErrors('email')}" class="error" th:errors="*{email}" >Error</span>
             </p>
             <p>
-                <label for="phone" class="sr-only">Phone No</label>
-                <input type="phone" id="phone" name="phone" class="form-control" placeholder="Phone No" required="true">
+                <label for="phone" class="sr-only" th:text="#{register.phoneNumber}">Phone No</label>
+                <input type="phone" id="phone" name="phone" class="form-control" placeholder="Phone No" required="true" th:field="*{phoneNumber}">
+                <span th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}" >Error</span>
             </p>
             <p>
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true">
+                <label for="password" class="sr-only" th:text="#{register.password}">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" th:field="*{password}">
+                <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}" >Error</span>
             </p>
             <p>
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true">
+                <label for="password" class="sr-only" th:text="#{register.password2}">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" th:field="*{password2}">
+                <span th:if="${#fields.hasErrors('password2')}" class="error" th:errors="*{password2}" >Error</span>
             </p>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         </form>

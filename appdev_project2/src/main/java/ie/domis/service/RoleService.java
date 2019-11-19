@@ -8,8 +8,9 @@ public interface RoleService {
 	
 	Role findByUserEmail(String email);
 	List<Role> findAll();
-	boolean addRole(Role role);
+	Role addRole(Role role);
 	boolean updateRoleDescription(String email, String description);
 	boolean removeRole(String email);
+	boolean doesUserHaveRole(String email);
 
 }
