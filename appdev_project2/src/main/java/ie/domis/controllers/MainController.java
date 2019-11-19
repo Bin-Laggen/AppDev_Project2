@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +28,6 @@ public class MainController {
 	@Autowired
 	UserService userService;
 	
-	@Secured({"ROLE_USER"})
 	@GetMapping(value= {"/", "/index"})
 	public String handleIndexRequest(Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
@@ -39,7 +37,6 @@ public class MainController {
 		return "index";
 	}
 	
-	@Secured({"ROLE_USER"})
 	@GetMapping(value= {"/job/{id}"})
 	public String handleJobRequest(@PathVariable("id") int id, Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
@@ -56,7 +53,6 @@ public class MainController {
 		return "job";
 	}
 	
-	@Secured({"ROLE_ADMIN"})
 	@GetMapping(value= {"/users"})
 	public String handleUsersRequest(Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
@@ -73,5 +69,14 @@ public class MainController {
 		return "account";
 	}
 	
+	@GetMapping(value= {"/register"})
+	public String handleRegistrationRequest() {
+		return "register";
+	}
+	
+	@GetMapping(value= {"/login"})
+	public String handleLoginRequest() {
+		return "login";
+	}
 
 }
