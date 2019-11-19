@@ -29,6 +29,24 @@
                 <td th:text="${user.phoneNumber}">Phone</td>
             </tr>
         </table>
+        
+        <table>
+            <tr>
+                <th>Job</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.name}">Job</td>
+                <td th:text="${job.date}">Date</td>
+            </tr>
+        </table>
+        
+         <div class="add-job">
+            <input type="text" class="input" name="Job" placeholder="Job">
+            <input type="text" class="input" name="Description" placeholder="Description">
+            <input type="datetime-local" class="input" name="Date" placeholder="Date">
+            <input type="submit" class="new-job-button" value="Add">
+        </div>
     </main>
 </body>
 
