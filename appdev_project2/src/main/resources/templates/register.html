@@ -48,6 +48,10 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.submit}">Register</button>
         </form>
     </div>
+    <footer>
+    	<a th:href="@{/register} + '?lang=en'" th:text="#{lang.english}"/>
+    	<a th:href="@{/register} + '?lang=pl'" th:text="#{lang.polish}"/>
+    </footer>
 </body>
 
 </html>

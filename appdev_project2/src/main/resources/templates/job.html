@@ -14,7 +14,7 @@
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
         </div>
         <div class="logout">
-            <h4 th:text="#{header.hello}">Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <h4><span th:text="#{header.hello}">Hello</span> <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button th:text="#{header.logout}">Log Out</button></a>
         </div>
     </header>
@@ -33,11 +33,11 @@
                 <td th:text="${job.date}">Date</td>
             </tr>
             <tr>
-                <td th:text="#{job.owner} + ' ' + #{account.name}">Job owner:</td>
+                <td th:text="#{job.ownerName}">Job owner:</td>
                 <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
             </tr>
             <tr>
-                <td th:text="#{job.owner} + ' ' + #{account.email}">Contact:</td>
+                <td th:text="#{job.ownerEmail}">Contact:</td>
                 <td th:text="${job.owner.email}">Contact</td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
 
         <table>
             <tr>
-                <th th:text="#{job.name}">Name</th>
+                <th th:text="#{account.name}">Name</th>
                 <th th:text="#{bid.value}">Value</th>
             </tr>
             <tr th:each="bid : ${bids}">
@@ -71,6 +71,10 @@
 	        </form>
         </div>
     </main>
+    <footer>
+    	<a th:href="@{/job/} + ${job.jobId} + '?lang=en'" th:text="#{lang.english}"/>
+    	<a th:href="@{/job/} + ${job.jobId} + '?lang=pl'" th:text="#{lang.polish}"/>
+    </footer>
 </body>
 
 </html>

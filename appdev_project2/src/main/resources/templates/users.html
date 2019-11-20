@@ -12,7 +12,7 @@
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
         </div>
         <div class="logout">
-            <h4 th:text="#{header.hello}">Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <h4><span th:text="#{header.hello}">Hello</span> <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button th:text="#{header.logout}">Log Out</button></a>
         </div>
     </header>
@@ -32,5 +32,9 @@
             </tr>
         </table>
     </main>
+    <footer>
+    	<a th:href="@{/users} + '?lang=en'" th:text="#{lang.english}"/>
+    	<a th:href="@{/users} + '?lang=pl'" th:text="#{lang.polish}"/>
+    </footer>
 </body>
 </html>
