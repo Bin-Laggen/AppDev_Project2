@@ -52,6 +52,20 @@
                 <td th:text="${bid.value}">Value</td>
             </tr>
         </table>
+        <div th:if="${canBid}">
+	        <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
+	        	<label for="jobId" class="sr-only"></label>
+	                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
+	                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
+                <label for="bidderId" class="sr-only"></label>
+	                <input type="hidden" id="bidderId" name="bidderId" class="form-control" placeholder="Bidder Id" required="true" th:field="*{bidderId}">
+	                <span th:if="${#fields.hasErrors('bidderId')}" class="error" th:errors="*{bidderId}" >Error</span>
+	        	<label for="bidValue" class="sr-only" th:text="#{newbid.bidValue}">Bid Value</label>
+	                <input type="number" step="0.01" id="bidValue" name="bidValue" class="form-control" placeholder="Bid Value" required="true" th:field="*{value}">
+	                <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
+	        	<button class="btn btn-lg btn-primary btn-block" type="submit">Bid</button>
+	        </form>
+        </div>
     </main>
 </body>
 

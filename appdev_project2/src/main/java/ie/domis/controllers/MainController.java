@@ -14,11 +14,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ie.domis.domain.Bid;
 import ie.domis.domain.Job;
 import ie.domis.domain.Role;
 import ie.domis.domain.User;
+import ie.domis.forms.BidForm;
 import ie.domis.forms.UserForm;
 import ie.domis.service.BidService;
 import ie.domis.service.JobService;
@@ -58,7 +60,6 @@ public class MainController {
 		User loggedInUser = userService.findByEmail(user.getName());
 		model.addAttribute("user", loggedInUser);
 		Job job = jobService.findJobById(id);
-		System.out.println(job);
 		if (job == null) {
 			model.addAttribute("id", id);
 			return "doesnotexist";
@@ -66,6 +67,15 @@ public class MainController {
 		List<Bid> bids = bidService.findAllBidsByJob(id);
 		model.addAttribute("job", job);
 		model.addAttribute("bids", bids);
+		if (!job.isActive() || (loggedInUser.getUserId() == job.getOwner().getUserId())) {
+			model.addAttribute("canBid", false);
+		} else {
+			model.addAttribute("canBid", true);
+		}
+		BidForm bidForm = new BidForm();
+		bidForm.setBidderId(loggedInUser.getUserId());
+		bidForm.setJobId(id);
+		model.addAttribute("bidForm", bidForm);
 		return "job";
 	}
 	
@@ -93,21 +103,24 @@ public class MainController {
 	
 	@PostMapping(value= {"/register"})
 	public String registerNewUser(@Valid UserForm userForm, BindingResult binding) {
+		if (binding.hasErrors()) {
+			return "register";
+		}
 		if (!userForm.getPassword().equals(userForm.getPassword2())) {
 			binding.addError(new FieldError("userForm", "password2", "Passwords must match"));
-		}
-		if (binding.hasErrors()) {
 			return "register";
 		}
 		Role newRole = new Role(userForm.getEmail(), "ROLE_USER");
 		newRole = roleService.addRole(newRole);
 		if (newRole == null) {
-			return"redirect:register";
+			binding.addError(new FieldError("userForm", "email", "User already exists with USER role"));
+			return "register";
 		}
 		User newUser = new User(userForm.getEmail(), passEnc.encode(userForm.getPassword()), userForm.getName(), userForm.getSurname(), userForm.getPhoneNumber(), newRole, true);
 		newUser = userService.addUser(newUser);
 		if (newUser == null) {
-			return "redirect:register";
+			binding.addError(new FieldError("userForm", "email", "User already exists"));
+			return "register";
 		}
 		return "redirect:/user/" + newUser.getUserId();
 		
@@ -116,6 +129,29 @@ public class MainController {
 	@GetMapping(value= {"/login"})
 	public String handleLoginRequest() {
 		return "login";
+	}
+	
+	@PostMapping(value= {"/newbid"})
+	public String handleNewBidRequest(@Valid BidForm bidForm, BindingResult binding, RedirectAttributes redirectAttributes) {
+		if (binding.hasErrors()) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		User user = userService.findById(bidForm.getBidderId());
+		if (user == null) {
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		Job job = jobService.findJobById(bidForm.getJobId());
+		if (job == null) {
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		Bid newBid = new Bid(user, job, bidForm.getValue());
+		newBid = bidService.addBid(newBid);
+		if (newBid == null) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		return "redirect:/job/" + bidForm.getJobId();
 	}
 
 }

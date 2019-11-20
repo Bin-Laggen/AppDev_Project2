@@ -55,7 +55,7 @@ public class DataLoader implements ApplicationRunner {
 		User admin = new User("admin@email.com", passEnc.encode("adminPass"), "Admin", "Admin", 123456789, adminRole, true);
 		userService.addUser(admin);
 		
-		Job j1 = new Job("Bathroom refurbish", "Small ensuite bathroom needs new tiles", LocalDateTime.now(), true, mary);
+		Job j1 = new Job("Bathroom refurbish", "Small ensuite bathroom needs new tiles", LocalDateTime.now().minusDays(20), true, mary);
 		jobService.addJob(j1);
 		Job j2 = new Job("Bedroom repaint", "Bedroom repaint required after dog left mud on the walls", LocalDateTime.now(), true, mary);
 		jobService.addJob(j2);

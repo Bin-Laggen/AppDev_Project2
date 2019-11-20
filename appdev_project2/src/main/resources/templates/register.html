@@ -41,11 +41,11 @@
                 <span th:if="${#fields.hasErrors('password')}" class="error" th:errors="*{password}" >Error</span>
             </p>
             <p>
-                <label for="password" class="sr-only" th:text="#{register.password2}">Password</label>
+                <label for="password" class="sr-only" th:text="#{register.password}">Password</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="true" th:field="*{password2}">
                 <span th:if="${#fields.hasErrors('password2')}" class="error" th:errors="*{password2}" >Error</span>
             </p>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.register}">Register</button>
         </form>
     </div>
 </body>
