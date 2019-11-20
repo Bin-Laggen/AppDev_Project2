@@ -16,7 +16,7 @@
         <form class="form-signin" method="post" th:action="@{/register}" th:object="${userForm}">
             <h2 class="form-signin-heading">Please register</h2>
             <p>
-                <label for="name" class="sr-only" th:text="#{register.name}" >Name</label>
+                <label for="name" class="sr-only" th:text="#{register.name}">Name</label>
                 <input type="name" id="name" name="name" class="form-control" placeholder="Name" required="true" th:field="*{name}">
                 <span th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}" >Error</span>
             </p>

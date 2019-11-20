@@ -7,8 +7,12 @@
 
 <body>
     <header>
-        <div></div>
-        <div><h1>JOB ADVERTISEMENTS</h1></div>
+        <div class="home">
+            <a th:href="@{'/index'}"><button>Home</button></a>
+        </div>
+        <div>
+            <h1>JOB ADVERTISEMENTS</h1>
+        </div>
         <div class="logout">
             <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button>Log Out</button></a>
@@ -53,10 +57,10 @@
             </tr>
         </table>
         <div th:if="${canBid}">
-	        <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
-	        	<label for="jobId" class="sr-only"></label>
-	                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
-	                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
+            <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
+                <label for="jobId" class="sr-only"></label>
+                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
+                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
                 <label for="bidderId" class="sr-only"></label>
 	                <input type="hidden" id="bidderId" name="bidderId" class="form-control" placeholder="Bidder Id" required="true" th:field="*{bidderId}">
 	                <span th:if="${#fields.hasErrors('bidderId')}" class="error" th:errors="*{bidderId}" >Error</span>

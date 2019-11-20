@@ -11,7 +11,9 @@
             <input type="text" class="input" name="q" placeholder="Search keyword">
             <input type="submit" class="search-button" value="Search">
         </div>
-        <div><h1>JOB ADVERTISEMENTS</h1></div>
+        <div>
+            <h1>JOB ADVERTISEMENTS</h1>
+        </div>
         <div class="logout">
             <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button>Log Out</button></a>
