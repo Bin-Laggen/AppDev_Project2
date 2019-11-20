@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import ie.domis.dao.RoleDAO;
 import ie.domis.domain.Bid;
@@ -16,6 +17,7 @@ import ie.domis.service.JobService;
 import ie.domis.service.UserService;
 
 @SpringBootApplication
+@EnableScheduling
 public class AppdevProject2Application implements CommandLineRunner {
 
 	@Autowired

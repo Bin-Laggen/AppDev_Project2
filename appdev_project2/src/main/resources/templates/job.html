@@ -45,17 +45,36 @@
                 <td th:text="${job.active}">Active</td>
             </tr>
         </table>
-
-        <table>
-            <tr>
-                <th th:text="#{account.name}">Name</th>
-                <th th:text="#{bid.value}">Value</th>
-            </tr>
-            <tr th:each="bid : ${bids}">
-                <td th:text="${bid.bidder.email}">Bidder</td>
-                <td th:text="${bid.value}">Value</td>
-            </tr>
-        </table>
+		<div th:if="${bids != null}">
+        	<p th:text="#{bid.allBids}">All Bids</p>
+	        <table>
+	            <tr>
+	                <th th:text="#{account.name}">Name</th>
+	                <th th:text="#{bid.value}">Value</th>
+	            </tr>
+	            <tr th:each="bid : ${bids}">
+	                <td th:text="${bid.bidder.email}">Bidder</td>
+	                <td th:text="${bid.value}">Value</td>
+	            </tr>
+	        </table>
+	    </div>
+        
+        <div th:if="${!job.active && winningBid != null}">
+        	<p th:text="#{bid.winner}">Winning Bid</p>
+	    	<table>
+	            <tr>
+	                <th th:text="#{account.name}">Name</th>
+	                <th th:text="#{account.email}">Email</th>
+	                <th th:text="#{bid.value}">Value</th>
+	            </tr>
+	            <tr>
+	                <td th:text="${winningBid.bidder.name}">Name</td>
+	                <td th:text="${winningBid.bidder.email}">Email</td>
+	                <td th:text="${winningBid.value}">Value</td>
+	            </tr>
+	        </table>
+	    </div>
+        
         <div th:if="${canBid}">
             <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
                 <label for="jobId" class="sr-only"></label>

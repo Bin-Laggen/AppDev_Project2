@@ -65,9 +65,16 @@ public class MainController {
 			model.addAttribute("id", id);
 			return "doesnotexist";
 		}
-		List<Bid> bids = bidService.findAllBidsByJob(id);
 		model.addAttribute("job", job);
-		model.addAttribute("bids", bids);
+		if (job.isActive()) {
+			List<Bid> bids = bidService.findAllBidsByJob(id);
+			model.addAttribute("bids", bids);
+		} else {
+			Bid winningBid = bidService.getMinBidForJob(id);
+			if (winningBid != null) {
+				model.addAttribute("winningBid", winningBid);
+			}
+		}
 		if (!job.isActive() || (loggedInUser.getUserId() == job.getOwner().getUserId())) {
 			model.addAttribute("canBid", false);
 		} else {
