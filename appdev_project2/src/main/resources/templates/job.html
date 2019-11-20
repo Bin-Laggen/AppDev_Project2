@@ -8,48 +8,48 @@
 <body>
     <header>
         <div class="home">
-            <a th:href="@{'/index'}"><button>Home</button></a>
+            <a th:href="@{'/index'}"><button th:text="#{header.home}">Home</button></a>
         </div>
         <div>
-            <h1>JOB ADVERTISEMENTS</h1>
+            <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
         </div>
         <div class="logout">
-            <h4>Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
-            <a th:href="@{'/logout'}"><button>Log Out</button></a>
+            <h4 th:text="#{header.hello}">Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <a th:href="@{'/logout'}"><button th:text="#{header.logout}">Log Out</button></a>
         </div>
     </header>
     <main>
         <table>
             <tr>
-                <td>Name:</td>
+                <td th:text="#{job.name}">Name:</td>
                 <td th:text="${job.name}">Name</td>
             </tr>
             <tr>
-                <td>Description:</td>
+                <td th:text="#{job.description}">Description:</td>
                 <td th:text="${job.description}">Description</td>
             </tr>
             <tr>
-                <td>Date:</td>
+                <td th:text="#{job.date}">Date:</td>
                 <td th:text="${job.date}">Date</td>
             </tr>
             <tr>
-                <td>Job owner:</td>
+                <td th:text="#{job.owner} + ' ' + #{account.name}">Job owner:</td>
                 <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
             </tr>
             <tr>
-                <td>Contact:</td>
+                <td th:text="#{job.owner} + ' ' + #{account.email}">Contact:</td>
                 <td th:text="${job.owner.email}">Contact</td>
             </tr>
             <tr>
-                <td>Active:</td>
+                <td th:text="#{job.active}">Active:</td>
                 <td th:text="${job.active}">Active</td>
             </tr>
         </table>
 
         <table>
             <tr>
-                <th>Name</th>
-                <th>Value</th>
+                <th th:text="#{job.name}">Name</th>
+                <th th:text="#{bid.value}">Value</th>
             </tr>
             <tr th:each="bid : ${bids}">
                 <td th:text="${bid.bidder.email}">Bidder</td>
@@ -59,15 +59,15 @@
         <div th:if="${canBid}">
             <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
                 <label for="jobId" class="sr-only"></label>
-                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
-                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
+	                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
+	                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
                 <label for="bidderId" class="sr-only"></label>
 	                <input type="hidden" id="bidderId" name="bidderId" class="form-control" placeholder="Bidder Id" required="true" th:field="*{bidderId}">
 	                <span th:if="${#fields.hasErrors('bidderId')}" class="error" th:errors="*{bidderId}" >Error</span>
-	        	<label for="bidValue" class="sr-only" th:text="#{newbid.bidValue}">Bid Value</label>
-	                <input type="number" step="0.01" id="bidValue" name="bidValue" class="form-control" placeholder="Bid Value" required="true" th:field="*{value}">
+	        	<label for="bidValue" class="sr-only" th:text="#{bid.value}">Bid Value</label>
+	                <input type="number" step="0.01" id="bidValue" name="bidValue" class="form-control" th:placeholder="#{bid.value}" required="true" th:field="*{value}">
 	                <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
-	        	<button class="btn btn-lg btn-primary btn-block" type="submit">Bid</button>
+	        	<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{newbid.submit}">Bid</button>
 	        </form>
         </div>
     </main>

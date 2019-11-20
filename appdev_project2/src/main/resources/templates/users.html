@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/job.css">
 </head>
 <body>
     <header>
-        <div class="search">
-        <input type="text" class="input" name="q" placeholder="Search keyword">
-        <input type="submit" class="search-button" value="Search">
+        <div class="home">
+            <a th:href="@{'/index'}"><button th:text="#{header.home}">Home</button></a>
         </div>
-        <h1>JOB ADVERTISEMENTS</h1>
+        <div>
+            <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
+        </div>
         <div class="logout">
-        <h5>Hello"xyz"</h5>
-        <button>Logout</button>
+            <h4 th:text="#{header.hello}">Hello <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <a th:href="@{'/logout'}"><button th:text="#{header.logout}">Log Out</button></a>
         </div>
     </header>
     <main>
         <table>
             <tr>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Phone Number</th>
+                <th th:text="#{users.email}">Email</th>
+                <th th:text="#{users.name}">Name</th>
+                <th th:text="#{users.surname}">Surname</th>
+                <th th:text="#{users.phoneNumber}">Phone Number</th>
             </tr>
             <tr th:each="user : ${users}">
             	<td th:text="${user.email}">E-mail</td>

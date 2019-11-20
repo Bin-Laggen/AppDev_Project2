@@ -14,17 +14,17 @@
 <body>
     <div class="container">
         <form class="form-signin" method="post" th:action="@{/login}">
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading" th:text="#{login.message}">Please sign in</h2>
             <p>
-                <label for="username" class="sr-only">Username</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+                <label for="username" class="sr-only" th:text="#{login.email}">Username</label>
+                <input type="text" id="username" name="username" class="form-control" th:placeholder="#{login.email}" required="" autofocus="">
             </p>
             <p>
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+                <label for="password" class="sr-only" th:text="#{login.password}">Password</label>
+                <input type="password" id="password" name="password" class="form-control" th:placeholder="#{login.password}" required="">
             </p>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            <a th:href="@{'/register'}">New account</a>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.submit}">Sign in</button>
+            <a th:href="@{'/register'}" th:text="#{login.newAccount}">New account</a>
         </form>
     </div>
 </body>

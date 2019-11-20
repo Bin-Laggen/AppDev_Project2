@@ -5,8 +5,8 @@
 </head>
 <body>
     <main>
-    	<h1><span th:text="${id}">ID</span><br> does not exist</h1>
-    	<h2><a href="/index">Back to Home</a></h2>
+    	<h1><span th:text="${id} + ' ' + #{doesnotexist.message}">ID does not exist</span></h1>
+    	<h2><a th:href="@{/index}" th:text="#{doesnotexist.back}">Back to Home</a></h2>
     </main>
 </body>
 </html>
