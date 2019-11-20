@@ -105,7 +105,11 @@ a:visited{
     width: auto;
 }
 .bid-table{
-    width: 50%;
+    width: 100%;
+}
+
+tbody{
+    width: 100%;
 }
 
 .home-btm{

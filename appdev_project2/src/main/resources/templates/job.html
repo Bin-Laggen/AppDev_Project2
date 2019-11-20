@@ -21,7 +21,7 @@
     <main>
         <div class="details">
             <table>
-                
+
                 <tr>
                     <td th:text="#{job.name}">Name:</td>
                     <td th:text="${job.name}">Name</td>
@@ -51,31 +51,39 @@
         <div class="bid">
             <div th:if="${bids != null}">
                 <table class="bid-table">
-                    <thead><p th:text="#{bid.allBids}">All Bids</p></thead>
-                    <tr>
-                        <th th:text="#{account.name}">Name</th>
-                        <th th:text="#{bid.value}">Value</th>
-                    </tr>
-                    <tr th:each="bid : ${bids}">
-                        <td th:text="${bid.bidder.email}">Bidder</td>
-                        <td th:text="${bid.value}">Value</td>
-                    </tr>
+                    <thead>
+                        <p th:text="#{bid.allBids}">All Bids</p>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th th:text="#{account.name}">Name</th>
+                            <th th:text="#{bid.value}">Value</th>
+                        </tr>
+                        <tr th:each="bid : ${bids}">
+                            <td th:text="${bid.bidder.email}">Bidder</td>
+                            <td th:text="${bid.value}">Value</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
             <div th:if="${!job.active && winningBid != null}">
-                <p th:text="#{bid.winner}">Winning Bid</p>
                 <table class="bid-table">
-                    <tr>
-                        <th th:text="#{account.name}">Name</th>
-                        <th th:text="#{account.email}">Email</th>
-                        <th th:text="#{bid.value}">Value</th>
-                    </tr>
-                    <tr>
-                        <td th:text="${winningBid.bidder.name}">Name</td>
-                        <td th:text="${winningBid.bidder.email}">Email</td>
-                        <td th:text="${winningBid.value}">Value</td>
-                    </tr>
+                    <thead>
+                        <p th:text="#{bid.winner}">Winning Bid</p>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th th:text="#{account.name}">Name</th>
+                            <th th:text="#{account.email}">Email</th>
+                            <th th:text="#{bid.value}">Value</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${winningBid.bidder.name}">Name</td>
+                            <td th:text="${winningBid.bidder.email}">Email</td>
+                            <td th:text="${winningBid.value}">Value</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 
