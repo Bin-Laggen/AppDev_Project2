@@ -8,7 +8,7 @@
 <body>
     <header>
         <div class="home">
-            <a th:href="@{'/index'}"><button th:text="#{header.home}">Home</button></a>
+            <a th:href="@{'/index'}"><button class="home-btm" th:text="#{header.home}">Home</button></a>
         </div>
         <div>
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
@@ -19,75 +19,80 @@
         </div>
     </header>
     <main>
-        <table>
-            <tr>
-                <td th:text="#{job.name}">Name:</td>
-                <td th:text="${job.name}">Name</td>
-            </tr>
-            <tr>
-                <td th:text="#{job.description}">Description:</td>
-                <td th:text="${job.description}">Description</td>
-            </tr>
-            <tr>
-                <td th:text="#{job.date}">Date:</td>
-                <td th:text="${job.date}">Date</td>
-            </tr>
-            <tr>
-                <td th:text="#{job.ownerName}">Job owner:</td>
-                <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
-            </tr>
-            <tr>
-                <td th:text="#{job.ownerEmail}">Contact:</td>
-                <td th:text="${job.owner.email}">Contact</td>
-            </tr>
-            <tr>
-                <td th:text="#{job.active}">Active:</td>
-                <td th:text="${job.active}">Active</td>
-            </tr>
-        </table>
-		<div th:if="${bids != null}">
-        	<p th:text="#{bid.allBids}">All Bids</p>
-	        <table>
-	            <tr>
-	                <th th:text="#{account.name}">Name</th>
-	                <th th:text="#{bid.value}">Value</th>
-	            </tr>
-	            <tr th:each="bid : ${bids}">
-	                <td th:text="${bid.bidder.email}">Bidder</td>
-	                <td th:text="${bid.value}">Value</td>
-	            </tr>
-	        </table>
-	    </div>
-        
-        <div th:if="${!job.active && winningBid != null}">
-        	<p th:text="#{bid.winner}">Winning Bid</p>
-	    	<table>
-	            <tr>
-	                <th th:text="#{account.name}">Name</th>
-	                <th th:text="#{account.email}">Email</th>
-	                <th th:text="#{bid.value}">Value</th>
-	            </tr>
-	            <tr>
-	                <td th:text="${winningBid.bidder.name}">Name</td>
-	                <td th:text="${winningBid.bidder.email}">Email</td>
-	                <td th:text="${winningBid.value}">Value</td>
-	            </tr>
-	        </table>
-	    </div>
-        
-        <div th:if="${canBid}">
-            <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
-                <label for="jobId" class="sr-only"></label>
-	                <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
-	                <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
-                <label for="bidderId" class="sr-only"></label>
+        <div class="details">
+            <table>
+                
+                <tr>
+                    <td th:text="#{job.name}">Name:</td>
+                    <td th:text="${job.name}">Name</td>
+                </tr>
+                <tr>
+                    <td th:text="#{job.description}">Description:</td>
+                    <td th:text="${job.description}">Description</td>
+                </tr>
+                <tr>
+                    <td th:text="#{job.date}">Date:</td>
+                    <td th:text="${job.date}">Date</td>
+                </tr>
+                <tr>
+                    <td th:text="#{job.ownerName}">Job owner:</td>
+                    <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
+                </tr>
+                <tr>
+                    <td th:text="#{job.ownerEmail}">Contact:</td>
+                    <td th:text="${job.owner.email}">Contact</td>
+                </tr>
+                <tr>
+                    <td th:text="#{job.active}">Active:</td>
+                    <td th:text="${job.active}">Active</td>
+                </tr>
+            </table>
+        </div>
+        <div class="bid">
+            <div th:if="${bids != null}">
+                <table class="bid-table">
+                    <thead><p th:text="#{bid.allBids}">All Bids</p></thead>
+                    <tr>
+                        <th th:text="#{account.name}">Name</th>
+                        <th th:text="#{bid.value}">Value</th>
+                    </tr>
+                    <tr th:each="bid : ${bids}">
+                        <td th:text="${bid.bidder.email}">Bidder</td>
+                        <td th:text="${bid.value}">Value</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${!job.active && winningBid != null}">
+                <p th:text="#{bid.winner}">Winning Bid</p>
+                <table class="bid-table">
+                    <tr>
+                        <th th:text="#{account.name}">Name</th>
+                        <th th:text="#{account.email}">Email</th>
+                        <th th:text="#{bid.value}">Value</th>
+                    </tr>
+                    <tr>
+                        <td th:text="${winningBid.bidder.name}">Name</td>
+                        <td th:text="${winningBid.bidder.email}">Email</td>
+                        <td th:text="${winningBid.value}">Value</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${canBid}">
+                <form class="form-signin" method="post" th:action="@{'/newbid'}" th:object="${bidForm}">
+                    <label for="jobId" class="sr-only"></label>
+                    <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="JobId" required="true" th:field="*{jobId}">
+                    <span th:if="${#fields.hasErrors('jobId')}" class="error" th:errors="*{jobId}" >Error</span>
+                    <label for="bidderId" class="sr-only"></label>
 	                <input type="hidden" id="bidderId" name="bidderId" class="form-control" placeholder="Bidder Id" required="true" th:field="*{bidderId}">
 	                <span th:if="${#fields.hasErrors('bidderId')}" class="error" th:errors="*{bidderId}" >Error</span>
-	        	<label for="bidValue" class="sr-only" th:text="#{bid.value}">Bid Value</label>
+                    <label for="bidValue" class="sr-only" th:text="#{bid.value}">Bid Value</label>
 	                <input type="number" step="0.01" id="bidValue" name="bidValue" class="form-control" th:placeholder="#{bid.value}" required="true" th:field="*{value}">
 	                <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
-	        	<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{newbid.submit}">Bid</button>
-	        </form>
+	        	    <button class="bid-button" type="submit" th:text="#{newbid.submit}">Bid</button>
+                </form>
+            </div>
         </div>
     </main>
     <footer>

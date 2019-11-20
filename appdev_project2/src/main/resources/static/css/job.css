@@ -7,11 +7,15 @@ header {
     border: black, solid, 3px;
 }
 
+body{
+    background-color: #f5fff0;
+}
+
 main{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     padding: 40px;
+    width: 80%;
 }
 .head{
     width: 80%;
@@ -53,15 +57,57 @@ h1{
     height: 30px;
     width: 80px;
     border-radius: 7px;
-    background-color: white;
-    border: 0px;
-}
-.bid-button:hover{
     background-color:  rgb(6, 104, 202);
     color:white;
     border: 0px;
-    transition-duration:0.5s;
 }
 .view{
     border:2px solid  rgb(26,140,255);
+}
+
+th {
+  background-color: #969696;
+  color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.details {
+    width: 50%;
+    float:left;
+}
+
+footer{
+    position:absolute;
+    bottom:0;
+    right:0;
+    background-color: red;
+}
+
+a{
+    color:black;
+    text-decoration: none;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.form-signin{
+    padding: 20px;
+    width: auto;
+}
+.bid-table{
+    width: 50%;
+}
+
+.home-btm{
+    width: auto;
 }

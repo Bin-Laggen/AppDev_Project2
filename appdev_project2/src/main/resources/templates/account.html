@@ -8,7 +8,7 @@
 <body>
     <header>
         <div class="home">
-            <a th:href="@{'/index'}"><button th:text="#{header.home}">Home</button></a>
+            <a th:href="@{'/index'}"><button class="home-btm" th:text="#{header.home}">Home</button></a>
         </div>
         <div>
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
@@ -19,7 +19,7 @@
         </div>
     </header>
     <main>
-        <table>
+        <table class="user-details">
             <tr>
                 <td th:text="#{account.name}">Name:</td>
                 <td th:text="${user.name} + ' ' + ${user.surname}">Name</td>
@@ -34,7 +34,7 @@
             </tr>
         </table>
 
-        <table>
+        <table class="class-details">
             <tr>
                 <th th:text="#{job.name}">Job</th>
                 <th th:text="#{job.date}">Date</th>
@@ -48,13 +48,13 @@
         <div class="add-job">
 	        <form class="form-signin" method="post" th:action="@{/newjob}" th:object="${jobForm}">
 	        	<input type="hidden" id="ownerId" name="ownerId" class="form-control" placeholder="OwnerId" required="true" th:field="*{ownerId}">
-	            <input type="text" class="input" name="Job" th:placeholder="#{job.name}" required="true" th:field="*{name}">
+	            <input type="text" class="input input-window" name="Job" th:placeholder="#{job.name}" required="true" th:field="*{name}">
 	            <span th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}" >Error</span>
 	            <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
-	            <input type="text" class="input" name="Description" th:placeholder="#{job.description}" required="true" th:field="*{description}">
+	            <input type="text" class="input input-window desc" name="Description" th:placeholder="#{job.description}" required="true" th:field="*{description}">
 	            <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}" >Error</span>
 	            <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
-	            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{account.addJob}">Add</button>
+	            <button class=" bid-button" type="submit" th:text="#{account.addJob}">Add</button>
 	        </form>
         </div>
     </main>

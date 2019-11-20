@@ -25,13 +25,15 @@
                 <th th:text="#{job.name}">Name</th>
                 <th th:text="#{job.description}">Description</th>
                 <th th:text="#{job.date}">Date Published</th>
+                <th th:text="#{job.active}">Active</th>
                 <th></th>
             </tr>
             <tr th:each="job : ${jobs}">
                 <td th:text="${job.name}">Name</td>
                 <td th:text="${job.description}">Description</td>
                 <td th:text="${job.date}">Date</td>
-                <td align='center'><a th:href="@{'/job/' + ${job.jobId}}" th:text="#{job.view}">View</a></td>
+                <td th:text="${job.active}">Active</td>
+                <td align='center'><a class="view" th:href="@{'/job/' + ${job.jobId}}" th:text="#{job.view}">View</a></td>
             </tr>
         </table>
     </main>

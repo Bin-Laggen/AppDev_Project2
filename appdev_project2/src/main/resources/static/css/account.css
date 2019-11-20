@@ -7,9 +7,13 @@ header {
     border: black, solid, 3px;
 }
 
+body{
+    background-color: #f5fff0;
+}
+
 main{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding: 40px;
 }
@@ -53,15 +57,57 @@ h1{
     height: 30px;
     width: 80px;
     border-radius: 7px;
-    background-color: white;
-    border: 0px;
-}
-.bid-button:hover{
     background-color:  rgb(6, 104, 202);
     color:white;
     border: 0px;
-    transition-duration:0.5s;
 }
+
+.class-details{
+    padding: 20px;
+}
+
+.class-details{
+  padding: 15px;
+  text-align: left;
+  border: 1px solid black;
+  padding: 20px;
+}
+
 .view{
     border:2px solid  rgb(26,140,255);
+}
+table{
+    width: 50%;
+}
+.input-window{
+    border: 1px solid gray;
+    border-radius: 3px;
+    background-color: rgba(128,128,128,0.3);
+}
+.add-job{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+.desc{
+    width: 300px;
+}
+a{
+    color:black;
+    text-decoration: none;
+}
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+footer{
+    position:absolute;
+    bottom:0;
+    right:0;
+    background-color: red;
+}
+
+.home-btm{
+    width: auto;
 }
