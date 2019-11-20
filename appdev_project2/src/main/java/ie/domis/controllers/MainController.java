@@ -116,6 +116,8 @@ public class MainController {
 	public String handleAccountRequest(@PathVariable("id") int id, Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
 		model.addAttribute("user", loggedInUser);
+		List<Job> jobs = jobService.findAllOwnersJobs(id);
+		model.addAttribute("jobs", jobs);
 		JobForm jobForm = new JobForm();
 		jobForm.setOwnerId(loggedInUser.getUserId());
 		model.addAttribute("jobForm", jobForm);
