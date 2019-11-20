@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,9 +54,11 @@ public class User {
 	private Role userRole;
 	
 	@OneToMany(mappedBy = "owner")
+	@JsonIgnore
 	private List<Job> jobs;
 	
 	@OneToMany(mappedBy = "bidder")
+	@JsonIgnore
 	private List<Bid> bids;
 
 	public User(String email, String password, String name, String surname, int phoneNumber, Role role, boolean enabled) {

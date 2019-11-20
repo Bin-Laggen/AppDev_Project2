@@ -12,10 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -45,6 +48,7 @@ public class Job {
 	private User owner;
 	
 	@OneToMany(mappedBy = "job")
+	@JsonIgnore
 	private List<Bid> bids;
 	
 	public Job(String name, String description, LocalDateTime date, boolean active, User owner) {
