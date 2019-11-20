@@ -32,7 +32,7 @@
             </p>
             <p>
                 <label for="phone" class="sr-only" th:text="#{register.phoneNumber}">Phone No</label>
-                <input type="phone" id="phone" name="phone" class="form-control" placeholder="Phone No" required="true" th:field="*{phoneNumber}">
+                <input type="number" id="phone" name="phone" class="form-control" placeholder="Phone No" required="true" th:field="*{phoneNumber}">
                 <span th:if="${#fields.hasErrors('phoneNumber')}" class="error" th:errors="*{phoneNumber}" >Error</span>
             </p>
             <p>
