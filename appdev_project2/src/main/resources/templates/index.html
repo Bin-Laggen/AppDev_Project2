@@ -15,7 +15,7 @@
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>
         </div>
         <div class="logout">
-            <h4><span th:text="#{header.hello}">Hello</span> <a th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
+            <h4><span th:text="#{header.hello}">Hello</span> <a class="email" th:text="${user.email}" th:href="@{'/user/' + ${user.userId}}">email</a></h4>
             <a th:href="@{'/logout'}"><button th:text="#{header.logout}">Log Out</button></a>
         </div>
     </header>
@@ -38,8 +38,10 @@
         </table>
     </main>
     <footer>
-    	<a th:href="@{/index} + '?lang=en'" th:text="#{lang.english}"/>
-    	<a th:href="@{/index} + '?lang=pl'" th:text="#{lang.polish}"/>
+        <p th:text="#{footer.language} ">Language</p>   
+    	<a class="language" th:href="@{/index} + '?lang=en'" th:text="#{lang.english} "/>
+        <p>/</p>
+    	<a class="language" th:href="@{/index} + '?lang=pl'" th:text="#{lang.polish} "/>
     </footer>
 </body>
 

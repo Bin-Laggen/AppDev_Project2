@@ -106,6 +106,36 @@ footer{
     bottom:0;
     right:0;
     background-color: red;
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    align-items: center;
+}
+
+.email{
+    color:black;
+    text-decoration: none;
+}
+.email:checked{
+    color:black;
+    text-decoration: none;
+}
+.email:visited{
+    color:black;
+    text-decoration: none;
+}
+
+.language{
+    color:black;
+    text-decoration: none;
+}
+.language:checked{
+    color:black;
+    text-decoration: none;
+}
+.language:visited{
+    color:black;
+    text-decoration: none;
 }
 
 .home-btm{

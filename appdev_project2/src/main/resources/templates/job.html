@@ -104,8 +104,10 @@
         </div>
     </main>
     <footer>
-    	<a th:href="@{/job/} + ${job.jobId} + '?lang=en'" th:text="#{lang.english}"/>
-    	<a th:href="@{/job/} + ${job.jobId} + '?lang=pl'" th:text="#{lang.polish}"/>
+        <p th:text="#{footer.language} ">Language</p>   
+    	<a class="language" th:href="@{/index} + '?lang=en'" th:text="#{lang.english} "/>
+        <p>/</p>
+    	<a class="language" th:href="@{/index} + '?lang=pl'" th:text="#{lang.polish} "/>
     </footer>
 </body>
 

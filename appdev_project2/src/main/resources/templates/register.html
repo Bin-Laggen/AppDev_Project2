@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/register.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -48,10 +49,13 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register.submit}">Register</button>
         </form>
     </div>
-    <footer>
-    	<a th:href="@{/register} + '?lang=en'" th:text="#{lang.english}"/>
-    	<a th:href="@{/register} + '?lang=pl'" th:text="#{lang.polish}"/>
-    </footer>
+    
 </body>
+<footer>
+    <p th:text="#{footer.language} ">Language</p>   
+    <a class="language" th:href="@{/index} + '?lang=en'" th:text="#{lang.english} "/>
+    <p>/</p>
+    <a class="language" th:href="@{/index} + '?lang=pl'" th:text="#{lang.polish} "/>
+</footer>
 
 </html>
