@@ -19,5 +19,6 @@ public interface JobService {
 	boolean updateJobOwner(int id, User owner);
 	boolean updateJobActive(int id, boolean active);
 	boolean isJobInDatabase(int id);
+	List<Job> findJobsContainingPhrase(String phrase);
 	
 }

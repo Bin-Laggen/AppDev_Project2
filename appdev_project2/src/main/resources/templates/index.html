@@ -8,8 +8,12 @@
 <body>
     <header>
         <div class="search">
-            <input type="text" class="input" name="q" th:placeholder="#{header.keyword}">
-            <button th:text="#{header.search}">Search</button>
+        	<form method="post" th:action="@{'/search'}" th:object="${searchForm}">
+	            <input type="text" id="searchPhrase" name="searchPhrase" class="form-control" th:placeholder="#{header.keyword}" required="true" th:field="*{searchPhrase}">
+                <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
+        	    <button class="bid-button" type="submit" th:text="#{header.search}">Search</button>
+	        </form>
+	        <a th:if="${showHome}" th:href="@{'/index'}"><button class="home-btm" th:text="#{header.home}">Home</button></a>
         </div>
         <div>
             <h1 th:text="#{header.jobAds}">JOB ADVERTISEMENTS</h1>

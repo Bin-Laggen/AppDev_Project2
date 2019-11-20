@@ -20,6 +20,9 @@ public interface JobDAO extends JpaRepository<Job, Integer> {
 	@Query(value="SELECT jobId FROM job", nativeQuery=true)
 	List<Integer> findAllJobIds();
 	
+	@Query(value="SELECT * FROM job WHERE LOWER(name) LIKE %:phrase% OR LOWER(description) LIKE %:phrase%", nativeQuery=true)
+	List<Job> findAllJobsWhichContainPhrase(@Param("phrase") String phrase);
+	
 	@Modifying
 	@Transactional
 	@Query(value="UPDATE job SET name= :name WHERE jobId= :id", nativeQuery= true)

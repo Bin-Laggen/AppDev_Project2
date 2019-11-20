@@ -22,6 +22,7 @@ import ie.domis.domain.Role;
 import ie.domis.domain.User;
 import ie.domis.forms.BidForm;
 import ie.domis.forms.JobForm;
+import ie.domis.forms.SearchForm;
 import ie.domis.forms.UserForm;
 import ie.domis.service.BidService;
 import ie.domis.service.JobService;
@@ -53,8 +54,29 @@ public class MainController {
 		model.addAttribute("user", loggedInUser);
 		List<Job> jobs = jobService.findAllJobs();
 		model.addAttribute("jobs", jobs);
+		SearchForm searchForm = new SearchForm();
+		model.addAttribute("searchForm", searchForm);
 		return "index";
 	}
+	
+	@PostMapping(value = {"/search"})
+	public String handleSearchRequest(@Valid SearchForm searchForm, BindingResult binding, RedirectAttributes redirectAttributes, Model model, Principal user) {
+		if (binding.hasErrors()) {
+			return "redirect:/index";
+		}
+		List<Job> matchingJobs = jobService.findJobsContainingPhrase(searchForm.getSearchPhrase());
+		if (matchingJobs.isEmpty()) {
+			return "redirect:/index";
+		}
+		User loggedInUser = userService.findByEmail(user.getName());
+		model.addAttribute("user", loggedInUser);
+		model.addAttribute("jobs", matchingJobs);
+		model.addAttribute("showHome", true);
+		searchForm = new SearchForm();
+		model.addAttribute("searchForm", searchForm);
+		return "index";
+	}
+	
 	
 	@GetMapping(value= {"/job/{id}"})
 	public String handleJobRequest(@PathVariable("id") int id, Model model, Principal user) {

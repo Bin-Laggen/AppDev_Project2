@@ -99,4 +99,9 @@ public class JobServiceImplementation implements JobService {
 		return dao.existsById(id);
 	}
 
+	@Override
+	public List<Job> findJobsContainingPhrase(String phrase) {
+		return dao.findAllJobsWhichContainPhrase(phrase.toLowerCase());
+	}
+
 }
