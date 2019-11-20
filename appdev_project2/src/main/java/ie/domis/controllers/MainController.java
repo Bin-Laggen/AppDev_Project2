@@ -141,11 +141,11 @@ public class MainController {
 		return "users";
 	}
 	
-	@GetMapping(value= {"/user/{id}"})
-	public String handleAccountRequest(@PathVariable("id") int id, Model model, Principal user) {
+	@GetMapping(value= {"/account"})
+	public String handleAccountRequest(Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
 		model.addAttribute("user", loggedInUser);
-		List<Job> jobs = jobService.findAllOwnersJobs(id);
+		List<Job> jobs = jobService.findAllOwnersJobs(loggedInUser.getUserId());
 		model.addAttribute("jobs", jobs);
 		JobForm jobForm = new JobForm();
 		jobForm.setOwnerId(loggedInUser.getUserId());
