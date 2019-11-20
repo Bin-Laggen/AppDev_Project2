@@ -35,8 +35,8 @@ public interface BidDAO extends JpaRepository<Bid, Integer> {
 	@Query(value="UPDATE bid SET value= :value WHERE bidId= :id", nativeQuery= true)
 	int updateValueInBidById(@Param("value") float value, @Param("id") int id);
 	
-	@Query(value="SELECT MAX(value) FROM bid WHERE job= :jobId", nativeQuery= true)
-	float getMaxBidByJob(@Param("jobId") int jobId);
+	@Query(value="SELECT * FROM bid WHERE (job, value) IN (SELECT job, MIN(value)  FROM bid WHERE job = 1 GROUP BY job);", nativeQuery= true)
+	Bid getMinBidForJob(@Param("jobId") int jobId);
 	
 	@Query(value="SELECT EXISTS(SELECT bidId FROM bid WHERE job= :jobId)", nativeQuery= true)
 	boolean existsJob(@Param("jobId") int jobId);

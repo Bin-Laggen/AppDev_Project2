@@ -56,8 +56,8 @@ public class BidServiceImplementation implements BidService {
 		if (isBidInDatabase(bid.getBidId())) {
 			return null;
 		}
-		float maxBid = getMaxBidForJob(bid.getJob().getJobId());
-		if (maxBid != -1 && (bid.getValue() >= maxBid)) {
+		Bid minBid = getMinBidForJob(bid.getJob().getJobId());
+		if (minBid != null && (bid.getValue() >= minBid.getValue() || bid.getBidder().getUserId() == minBid.getBidder().getUserId())) {
 			return null;
 		}
 		return dao.save(bid);
@@ -110,11 +110,11 @@ public class BidServiceImplementation implements BidService {
 	}
 
 	@Override
-	public float getMaxBidForJob(int jobId) {
+	public Bid getMinBidForJob(int jobId) {
 		if (doesJobHaveBids(jobId)) {
-			return dao.getMaxBidByJob(jobId);
+			return dao.getMinBidForJob(jobId);
 		}
-		return -1;
+		return null;
 	}
 
 }

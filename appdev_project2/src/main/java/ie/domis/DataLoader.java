@@ -67,19 +67,19 @@ public class DataLoader implements ApplicationRunner {
 		Bid b1 = new Bid(pat, j2, 150);
 		b1 = bidService.addBid(b1);
 		
-		Bid b2 = new Bid(john, j2, 200);
+		Bid b2 = new Bid(john, j2, 125);
 		b2 = bidService.addBid(b2);
 		
 		Bid b3 = new Bid(john, j1, 500);
 		b3 = bidService.addBid(b3);
 
-		Bid b4 = new Bid(pat, j2, 250);
+		Bid b4 = new Bid(pat, j2, 100);
 		b4 = bidService.addBid(b4);
 		
 		Bid b5 = new Bid(mary, j3, 1000);
 		b5 = bidService.addBid(b5);
 		
-		Bid b6 = new Bid(pat, j1, 550);
+		Bid b6 = new Bid(pat, j1, 450);
 		b6 = bidService.addBid(b6);
 		
 		
