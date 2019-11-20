@@ -55,6 +55,14 @@ public class Job {
 		this.owner = owner;
 	}
 	
+	public Job(String name, String description, User owner) {
+		this.name = name;
+		this.description = description;
+		this.date = LocalDateTime.now();
+		this.active = true;
+		this.owner = owner;
+	}
+	
 	public String toString() {
 		String output = "Job: ";
 		if (this.jobId != 0) {

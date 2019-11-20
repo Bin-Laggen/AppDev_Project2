@@ -46,10 +46,16 @@
         </table>
 
         <div class="add-job">
-            <input type="text" class="input" name="Job" placeholder="Job">
-            <input type="text" class="input" name="Description" placeholder="Description">
-            <input type="datetime-local" class="input" name="Date" placeholder="Date">
-            <input type="submit" class="new-job-button" value="Add">
+	        <form class="form-signin" method="post" th:action="@{/newjob}" th:object="${jobForm}">
+	        	<input type="hidden" id="ownerId" name="ownerId" class="form-control" placeholder="OwnerId" required="true" th:field="*{ownerId}">
+	            <input type="text" class="input" name="Job" placeholder="Job Name" required="true" th:field="*{name}">
+	            <span th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}" >Error</span>
+	            <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
+	            <input type="text" class="input" name="Description" placeholder="Description" required="true" th:field="*{description}">
+	            <span th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}" >Error</span>
+	            <span th:if="${valueError}" class="error" th:text="#{newbid.valueError}" >Error</span>
+	            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{account.addJob}">Add</button>
+	        </form>
         </div>
     </main>
 </body>

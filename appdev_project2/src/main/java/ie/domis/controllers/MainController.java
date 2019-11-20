@@ -21,6 +21,7 @@ import ie.domis.domain.Job;
 import ie.domis.domain.Role;
 import ie.domis.domain.User;
 import ie.domis.forms.BidForm;
+import ie.domis.forms.JobForm;
 import ie.domis.forms.UserForm;
 import ie.domis.service.BidService;
 import ie.domis.service.JobService;
@@ -79,6 +80,29 @@ public class MainController {
 		return "job";
 	}
 	
+	@PostMapping(value= {"/newbid"})
+	public String handleNewBidRequest(@Valid BidForm bidForm, BindingResult binding, RedirectAttributes redirectAttributes) {
+		if (binding.hasErrors()) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		User user = userService.findById(bidForm.getBidderId());
+		if (user == null) {
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		Job job = jobService.findJobById(bidForm.getJobId());
+		if (job == null) {
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		Bid newBid = new Bid(user, job, bidForm.getValue());
+		newBid = bidService.addBid(newBid);
+		if (newBid == null) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/job/" + bidForm.getJobId();
+		}
+		return "redirect:/job/" + bidForm.getJobId();
+	}
+	
 	@GetMapping(value= {"/users"})
 	public String handleUsersRequest(Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
@@ -92,7 +116,29 @@ public class MainController {
 	public String handleAccountRequest(@PathVariable("id") int id, Model model, Principal user) {
 		User loggedInUser = userService.findByEmail(user.getName());
 		model.addAttribute("user", loggedInUser);
+		JobForm jobForm = new JobForm();
+		jobForm.setOwnerId(loggedInUser.getUserId());
+		model.addAttribute("jobForm", jobForm);
 		return "account";
+	}
+
+	@PostMapping(value= {"/newjob"})
+	public String handleNewJobRequest(@Valid JobForm jobForm, BindingResult binding, RedirectAttributes redirectAttributes) {
+		if (binding.hasErrors()) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/user/" + jobForm.getOwnerId();
+		}
+		User user = userService.findById(jobForm.getOwnerId());
+		if (user == null) {
+			return "redirect:/user/" + jobForm.getOwnerId();
+		}
+		Job newJob = new Job(jobForm.getName(), jobForm.getDescription(), user);
+		newJob = jobService.addJob(newJob);
+		if (newJob == null) {
+			redirectAttributes.addFlashAttribute("valueError", true);
+			return "redirect:/user/" + jobForm.getOwnerId();
+		}
+		return "redirect:/job/" + newJob.getJobId();
 	}
 	
 	@GetMapping(value= {"/register"})
@@ -129,29 +175,6 @@ public class MainController {
 	@GetMapping(value= {"/login"})
 	public String handleLoginRequest() {
 		return "login";
-	}
-	
-	@PostMapping(value= {"/newbid"})
-	public String handleNewBidRequest(@Valid BidForm bidForm, BindingResult binding, RedirectAttributes redirectAttributes) {
-		if (binding.hasErrors()) {
-			redirectAttributes.addFlashAttribute("valueError", true);
-			return "redirect:/job/" + bidForm.getJobId();
-		}
-		User user = userService.findById(bidForm.getBidderId());
-		if (user == null) {
-			return "redirect:/job/" + bidForm.getJobId();
-		}
-		Job job = jobService.findJobById(bidForm.getJobId());
-		if (job == null) {
-			return "redirect:/job/" + bidForm.getJobId();
-		}
-		Bid newBid = new Bid(user, job, bidForm.getValue());
-		newBid = bidService.addBid(newBid);
-		if (newBid == null) {
-			redirectAttributes.addFlashAttribute("valueError", true);
-			return "redirect:/job/" + bidForm.getJobId();
-		}
-		return "redirect:/job/" + bidForm.getJobId();
 	}
 
 }
