@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <main>
+         <table>
+            <thead>
+                <p th:text="#{job.allJobs}">All Jobs</p>
+            </thead>
+            <tbody>
+                <tr>
+                    <th th:text="#{job.name}">Name</th>
+                    <th th:text="#{job.description}">Description</th>
+                    <th th:text="#{job.date}">Date</th>
+                    <th th:text="#{job.ownerName}">Job Owner</th>
+                    <th th:text="#{job.ownerEmail}">Contact</th>
+                    <th th:text="#{job.active}">Active</th>
+                </tr>
+                <tr th:each="job : ${jobs}">
+                    <td th:text="${job.name}">Name</td>
+                    <td th:text="${job.description}">Description</td>
+                    <td th:text="${job.date}">Date</td>
+                    <td th:text="${job.owner.name} + ' ' + ${job.owner.surname}">Name</td>
+                    <td th:text="${job.owner.email}">Contact</td>
+                    <td th:text="${job.active}">Active</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4><a th:href="@{'/index'}" th:text="#{header.home}">Home</a></h4>
+    </main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <main>
+         <table>
+            <thead>
+                <p th:text="#{bid.allBids}">All Bids</p>
+            </thead>
+            <tbody>
+                <tr>
+                    <th th:text="#{job.name}">Job</th>
+                    <th th:text="#{bid.value}">Value</th>
+                </tr>
+                <tr th:each="bid : ${bids}">
+                    <td th:text="${bid.job.name}">Job</td>
+                    <td th:text="${bid.value}">Value</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4><a th:href="@{'/index'}" th:text="#{header.home}">Home</a></h4>
+    </main>
+</body>
+</html>

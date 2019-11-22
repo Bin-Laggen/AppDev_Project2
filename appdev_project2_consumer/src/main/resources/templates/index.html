@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <main>
+        <table>
+        	<tr>
+                <th th:text="#{account.name}">Name</th>
+                <th th:text="#{account.email}">Description</th>
+                <th th:text="#{account.phoneNumber}">Date Published</th>
+                <th></th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.name} + ' ' + ${user.surname}">Name</td>
+                <td th:text="${user.email}">Email</td>
+                <td th:text="${user.phoneNumber}">Phone</td>
+                <td align='center'><a class="view" th:href="@{'/bids/' + ${user.userId}}" th:text="#{account.bids}">View Bids</a></td>
+            </tr>
+        </table>
+        <h4><a th:href="@{'/jobs'}" th:text="#{header.jobs}">Jobs</a></h4>
+    </main>
+</body>
+
+</html>
